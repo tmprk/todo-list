@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <div id="sidebar">
+      
+      <div id="header">
+        <div id="heading">My Projects</div>
+        <button id="addButton">&#43;</button>
+      </div>
+
+      <div id="projects">
+
+        <div id="deadlines">
+          <div id="unfiled">
+            <div class="info">
+              <div class="projectTitle">Unfiled</div>
+              <div class="numberOfTasks">2 items</div>
+            </div>
+            <div class="dot orange"></div>
+          </div>
+          <div id="today">
+            <div class="info">
+              <div class="projectTitle">Today</div>
+              <div class="numberOfTasks">3 items</div>
+            </div>
+            <div class="dot red"></div>
+          </div>
+          <div id="week">
+            <div class="info">
+              <div class="projectTitle">Week</div>
+              <div class="numberOfTasks">6 items</div>
+            </div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="projectTitle">Work</div>
+          <div class="numberOfTasks">7 items</div>
+        </div>
+        <div class="project">
+          <div class="projectTitle">School</div>
+          <div class="numberOfTasks">9 items</div>
+        </div>
+        <div class="project">
+          <div class="projectTitle">Learning</div>
+          <div class="numberOfTasks">3 items</div>
+        </div>
+        <div class="project">
+          <div class="projectTitle">Cooking</div>
+          <div class="numberOfTasks">4 items</div>
+        </div>
+        <div class="project">
+          <div class="projectTitle">Writing</div>
+          <div class="numberOfTasks">5 items</div>
+        </div>
+        <div class="project">
+          <div class="projectTitle">Workout</div>
+          <div class="numberOfTasks">2 items</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="todolist"></div>
+    
+  </div>
+</body>
+</html>

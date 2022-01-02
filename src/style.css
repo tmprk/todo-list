@@ -1,0 +1,170 @@
+/* CSS Reset */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+	padding: 0;
+}
+
+body {
+	line-height: 1;
+	font-family: "Inter", -apple-system, sans-serif;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Starts Here */
+
+#container {
+  background-color: red;
+  height: 100vh;
+  display: flex;
+}
+
+#sidebar {
+  width: 300px;
+  background-color: rgb(235, 235, 235);
+
+  overflow-y: auto;
+  border-right: 1px solid black;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#todolist {
+  flex: 1;
+  background-color: rosybrown;
+}
+
+#header {
+  background-color: white;
+  border-bottom: 1px solid black;
+  height: 40px;
+  padding: 20px 12px 20px 20px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+}
+
+#heading {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#addButton {
+  color: black;
+  padding: 8px;
+  background-color: transparent;
+  line-height: 0;
+  cursor: pointer;
+  overflow: hidden;
+
+  border: none;
+  border-radius: 4px;
+  font-size: 28px;
+}
+
+#deadlines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* height: 260px; */
+  padding: 20px 0px 20px 0px;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#unfiled,
+#today,
+#week {
+  /* flex: 1; */
+  padding: 20px;
+  background-color: white;
+  outline: 1px solid black;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  align-self: center;
+  border-radius: 50%;
+}
+
+.dot.orange {
+  background-color: orange;
+}
+
+.dot.red {
+  background-color: tomato;
+}
+
+.dot.green {
+  background-color: rgb(27, 172, 27);
+}
+
+#projects {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  overflow-y: auto;
+}
+
+#projects::-webkit-scrollbar {
+  display: none;
+}
+
+.project {
+  background-color: white;
+  outline: 1px solid black;
+  height: 100px;
+  /* width: 50%; */
+  padding: 20px;
+  flex: 30%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.projectTitle {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.numberOfTasks {
+  font-size: 14px;
+  color: rgb(182, 182, 182);
+}
