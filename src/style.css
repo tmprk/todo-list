@@ -221,15 +221,53 @@ table {
 }
 
 #details {
-  background-color: cadetblue;
-  transition: opacity 0.4s ease-out, height 0.25s ease-out;
+  background-color: rgb(240, 240, 240);
+  transition: opacity 100ms ease-out, height 200ms ease-out;
   opacity: 0;
   height: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  visibility: hidden;
 }
 
 #details.show {
   opacity: 1;
-  height: 80px;
+  /* min-height: 50px; */
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+
+  visibility: visible;
+}
+
+#details input[type=date] {
+  font-family: 'Inter';
+  padding: 10px 5px 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+#details.show input[type=text] {
+  flex: 1;
+  padding: 12px;
+  font-family: "Inter";
+  border-radius: 5px;
+  
+  border: none;
+  overflow: auto;
+  outline: none;
+  resize: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  font-size: 18px;
 }
 
 [type=checkbox] {
