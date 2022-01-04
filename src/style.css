@@ -113,6 +113,14 @@ table {
   justify-content: space-between;
 }
 
+.filter {
+  transition: filter 100ms;
+}
+
+.filter:hover {
+  filter: brightness(0.95);
+}
+
 .dot {
   height: 12px;
   width: 12px;
@@ -146,7 +154,8 @@ table {
 
 .project {
   background-color: white;
-  outline: 1px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
   height: 100px;
   /* width: 50%; */
   padding: 20px;
@@ -157,6 +166,12 @@ table {
   justify-content: flex-start;
   align-items: flex-start;
   gap: 4px;
+
+  transition: filter 100ms;
+}
+
+.project:hover {
+  filter: brightness(0.95);
 }
 
 .projectTitle {
