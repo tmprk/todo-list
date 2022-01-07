@@ -68,7 +68,7 @@ table {
   top: 0;
 }
 
-#heading {
+#title {
   font-size: 20px;
   font-weight: 600;
 }
@@ -107,10 +107,14 @@ table {
   /* flex: 1; */
   padding: 20px;
   background-color: white;
-  outline: 1px solid black;
+  border-top: 1px solid black;
 
   display: flex;
   justify-content: space-between;
+}
+
+.filter:last-child {
+  border-bottom: 1px solid black;
 }
 
 .filter {
@@ -157,9 +161,9 @@ table {
   border-top: 1px solid black;
   border-left: 1px solid black;
   height: 100px;
-  /* width: 50%; */
+  width: calc(50% - 41px);
   padding: 20px;
-  flex: 30%;
+  /* flex: 30%; */
 
   display: flex;
   flex-direction: column;

@@ -1,13 +1,7 @@
 import './style.css'
 import { pubsub } from './modules/pubsub.js'
-
-function main() {
-  pubsub.sub('hello', hello)
-}
-
-function hello(x) {
-  console.log('hi')
-}
+import { header } from './modules/header';
+import { projects } from './modules/projects';
 
 const list = document.getElementById('list');
 const listItems = document.querySelectorAll('.list-item');
@@ -15,7 +9,7 @@ const listItems = document.querySelectorAll('.list-item');
 listItems.forEach((element, index) => {
   element.addEventListener('click', function(e) {
 
-    // doesn't trigger when you click the custom checkbox
+    // don't trigger when you click the custom checkbox
     if (!e.target.classList.contains('custom-checkbox')) {
       var nextId = element.nextElementSibling.id;
       var details = document.getElementById('details');
@@ -54,6 +48,13 @@ function createDetailItem(date, notes) {
   detailsListItem.appendChild(description);
 
   return detailsListItem;
+}
+
+function main() {
+  const sidebar = document.getElementById('sidebar');
+
+  header.render(sidebar);
+  projects.render(sidebar);
 }
 
 main();

@@ -1,9 +1,18 @@
+// credit to: https://github.com/prof3ssorSt3v3/pubsub-demo/
+
 export const pubsub = {
   events: {},
   sub: (eventName, func) => {
-    console.log('sub');
+    pubsub.events[eventName] = pubsub.events[eventName] || [];
+    pubsub.events[eventName].push(func);
+    console.log(`someone subscribed to ${eventName}, which will run ${func.name}`)
   },
-  pub: (eventName, func) => {
-    console.log('pub');
+  pub: (eventName, data) => {
+    if (pubsub.events[eventName]) {
+      pubsub.events[eventName].forEach(func => {
+        func(data);
+        console.log(`${eventName} was published, which will run ${func}`);
+      });
+    }
   },
 }
