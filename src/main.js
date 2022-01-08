@@ -2,6 +2,7 @@ import './style.css'
 import { pubsub } from './modules/pubsub.js'
 import { header } from './modules/header';
 import { projects } from './modules/projects';
+import { listView } from './modules/listView';
 
 const list = document.getElementById('list');
 const listItems = document.querySelectorAll('.list-item');
@@ -52,9 +53,11 @@ function createDetailItem(date, notes) {
 
 function main() {
   const sidebar = document.getElementById('sidebar');
+  const todoList = document.getElementById('todoList');
 
   header.render(sidebar);
   projects.render(sidebar);
+  listView.render(todoList);
 }
 
 main();

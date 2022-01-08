@@ -1,4 +1,4 @@
-// credit to: https://github.com/prof3ssorSt3v3/pubsub-demo/
+// https://github.com/prof3ssorSt3v3/pubsub-demo/
 
 export const pubsub = {
   events: {},
