@@ -29,9 +29,12 @@ export const storage = {
     var uuid = Math.random().toString(36).slice(-6);
     localStorage.setItem(uuid, JSON.stringify(dummyData));
   },
+  all: () => {
+    return Object.keys(localStorage);
+  },
   getProject: (uuid) => {
     const project = JSON.parse(localStorage.getItem(uuid));
-    return project || [];
+    return project;
   },
   set: (projectID, data) => {
     localStorage.setItem(projectID, data);

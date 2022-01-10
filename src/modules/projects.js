@@ -1,18 +1,20 @@
+import Project from "./models/project";
 import { pubsub } from "./pubsub";
 import { storage } from "./storage";
+import { removeElementsByClass } from "./utils";
 
 export const projects = {
   render: div => {
     const container = document.createElement('div');
     container.setAttribute('id', 'projects');
 
-    const categories = ['day', 'week', 'month'];
+    const filters = ['day', 'week', 'month'];
     const deadlines = document.createElement('div');
     deadlines.setAttribute('id', 'deadlines');
 
-    categories.forEach((element, index) => {
+    filters.forEach((element, index) => {
       const category = document.createElement('div');
-      category.setAttribute('id', categories[index]);
+      category.setAttribute('id', filters[index]);
       category.className = 'filter';
 
       const info = document.createElement('div');
@@ -20,7 +22,7 @@ export const projects = {
 
       const title = document.createElement('div');
       title.className = 'projectTitle';
-      title.textContent = categories[index];
+      title.textContent = filters[index];
 
       const taskNumber = document.createElement('div');
       taskNumber.className = 'numberOfTasks';
@@ -37,15 +39,13 @@ export const projects = {
       category.appendChild(dot);
       deadlines.appendChild(category);
     })
-
     container.appendChild(deadlines);
     div.appendChild(container);
-
+    
+    projects.refresh();
     pubsub.sub('projectAdded', projects.add);
   },
-  add: (projectName) => {
-    var uuid = Math.random().toString(36).slice(-6);
-    
+  renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
     newProject.className = 'project';
     newProject.setAttribute('data-id', uuid);
@@ -53,7 +53,7 @@ export const projects = {
     const projectTitle = document.createElement('div');
     projectTitle.className = 'projectTitle';
     projectTitle.textContent = projectName;
-    
+
     const numberOfTasks = document.createElement('div');
     numberOfTasks.className = 'numberOfTasks';
     numberOfTasks.textContent = '0 items';
@@ -61,19 +61,32 @@ export const projects = {
     newProject.appendChild(projectTitle);
     newProject.appendChild(numberOfTasks);
 
-    newProject.addEventListener('click', function(e) {
+    newProject.addEventListener('click', function (e) {
       pubsub.pub('updateListView', uuid);
     });
-
-    var projectsContainer = document.querySelector('#projects');
-    projectsContainer.appendChild(newProject);
+    return newProject;
+  },
+  add: (projectName) => {
+    var uuid = Math.random().toString(36).slice(-6);
 
     // add new project to storage
-    const emptyProjectData = {
-      'projectTitle': `${projectName}`,
-      'todos': []
-    };
-    storage.set(uuid, JSON.stringify(emptyProjectData));
+    const newProjectData = new Project(projectName, []);
+    storage.set(uuid, JSON.stringify(newProjectData));
+    projects.refresh();
+
     console.log(`${projectName} was added`);
+  },
+  refresh: () => {
+    removeElementsByClass('project');
+    const allProjects = storage.all();
+
+    if (allProjects.length > 0) {
+      var projectsContainer = document.getElementById('projects');
+      allProjects.forEach((projectID) => {
+        const projectName = storage.getProject(projectID)['title'];
+        const projectDiv = projects.renderProject(projectName, projectID)
+        projectsContainer.appendChild(projectDiv);
+      })
+    }
   }
 }

@@ -2,7 +2,7 @@ import { pubsub } from './pubsub.js'
 import { storage } from './storage.js';
 
 export const listView = {
-  selectedList: null,
+  selectedProject: null,
   render: div => {
     const listWrapper = document.createElement('div');
     listWrapper.setAttribute('id', 'listWrapper');
@@ -19,6 +19,8 @@ export const listView = {
     pubsub.sub('updateListView', listView.updateView);
   },
   updateView: (uuid) => {
+    listView.selectedProject = uuid;
+    console.log(listView.selectedProject);
     console.log(`${uuid} clicked`);
     const list = document.getElementById('list');
     const header = document.getElementById('listHeader');
@@ -26,7 +28,7 @@ export const listView = {
     var projectObj = storage.getProject(uuid);
     var todos = projectObj['todos'];
 
-    header.textContent = projectObj['projectTitle'];
+    header.textContent = projectObj['title'];
     list.innerHTML = '';
 
     todos.forEach((element, index) => {

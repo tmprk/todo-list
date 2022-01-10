@@ -61,9 +61,9 @@ function main() {
 
   listView.render(todoList);
 
-  if (storage.keys.length == 0) {
-    projects.add('example');
-  }
+  // if (storage.keys.length == 0) {
+  //   projects.add('example');
+  // }
 }
 
 main();

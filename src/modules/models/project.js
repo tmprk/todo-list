@@ -1,6 +1,6 @@
 export default class Project {
-  constructor(identifier, todos = []) {
-    this.identifier = identifier;
+  constructor(title, todos = []) {
+    this.title = title;
     this.todos = todos;
   }
 
@@ -15,6 +15,8 @@ export default class Project {
     // storage setItem stringify
   }
 
-  removeTodo()
-
+  removeTodo(identifier) {
+    console.log(identifier);
+  }
+  
 }

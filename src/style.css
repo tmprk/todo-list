@@ -160,8 +160,8 @@ table {
   background-color: white;
   border-top: 1px solid rgb(174, 174, 174);
   border-left: 1px solid rgb(174, 174, 174);
-  height: 100px;
-  width: calc(50% - 41px);
+  height: 60px;
+  width: 100%;
   padding: 20px;
   /* flex: 30%; */
 
