@@ -1,11 +1,12 @@
 import { pubsub } from "./pubsub";
+import { storage } from "./storage";
 
 export const projects = {
   render: div => {
     const container = document.createElement('div');
     container.setAttribute('id', 'projects');
 
-    const categories = ['unfiled', 'today', 'week'];
+    const categories = ['day', 'week', 'month'];
     const deadlines = document.createElement('div');
     deadlines.setAttribute('id', 'deadlines');
 
@@ -43,8 +44,11 @@ export const projects = {
     pubsub.sub('projectAdded', projects.add);
   },
   add: (projectName) => {
+    var uuid = Math.random().toString(36).slice(-6);
+    
     const newProject = document.createElement('div');
     newProject.className = 'project';
+    newProject.setAttribute('data-id', uuid);
 
     const projectTitle = document.createElement('div');
     projectTitle.className = 'projectTitle';
@@ -57,8 +61,19 @@ export const projects = {
     newProject.appendChild(projectTitle);
     newProject.appendChild(numberOfTasks);
 
+    newProject.addEventListener('click', function(e) {
+      pubsub.pub('updateListView', uuid);
+    });
+
     var projectsContainer = document.querySelector('#projects');
     projectsContainer.appendChild(newProject);
+
+    // add new project to storage
+    const emptyProjectData = {
+      'projectTitle': `${projectName}`,
+      'todos': []
+    };
+    storage.set(uuid, JSON.stringify(emptyProjectData));
     console.log(`${projectName} was added`);
   }
 }

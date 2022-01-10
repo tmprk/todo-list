@@ -101,9 +101,9 @@ table {
   gap: 4px;
 }
 
-#unfiled,
-#today,
-#week {
+#day,
+#week,
+#month {
   /* flex: 1; */
   padding: 20px;
   background-color: white;
@@ -354,4 +354,172 @@ table {
 [type=checkbox]:checked::-ms-check {
   box-shadow: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E %3Cpath d='M15.88 8.29L10 14.17l-1.88-1.88a.996.996 0 1 0-1.41 1.41l2.59 2.59c.39.39 1.02.39 1.41 0L17.3 9.7a.996.996 0 0 0 0-1.41c-.39-.39-1.03-.39-1.42 0z' fill='%23fff'/%3E %3C/svg%3E");
+}
+
+#addTodoButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* modal */
+/* https://codeorum.com/tutorials/simple-modal-element-with-vanilla-js-and-animation-effects */
+
+.modal {
+  z-index: 9999;
+
+  width: 100%;
+  height: 100%;
+  position: fixed;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.3);
+  visibility: hidden;
+  opacity: 0;
+  /* transition: all 0.3s ease-in-out; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal .m-container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  max-width: 100%;
+  min-height: 150px;
+  height: auto;
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.modal .m-container.slide-from-top {
+  top: -200px;
+}
+
+.modal .m-container .m-title {
+  box-sizing: border-box;
+  background-color: rgb(220, 220, 220);
+  margin: 0;
+  padding: 20px 20px;
+  border-radius: 5px 5px 0 0;
+  color: #f2f2f2;
+  font-weight: 500;
+  font-size: 18px;
+  flex-wrap: wrap;
+  color: rgb(69, 69, 69);
+}
+
+.modal .m-container .m-content {
+  box-sizing: border-box;
+  background-color: #fff;
+  min-height: 150px;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 20px;
+  border-radius: 0 0 5px 5px;
+}
+
+.modal .m-container .m-content .m-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  background-color: aquamarine;
+}
+
+.modal.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal.active .m-container {
+  opacity: 1;
+}
+
+.modal.active .m-container.slide-from-top {
+  top: 0px;
+}
+
+
+/* modal-form */
+input {
+    width: 100%;
+}
+
+span {
+    display: block;
+    /* overflow: hidden; */
+    padding-right:10px;
+}
+button {
+    float: right;
+}
+
+#form-example {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-item {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-size: 16px;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type=text],
+input[type=date] {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+  border: 1px solid rgb(205, 205, 205);
+  border-radius: 4px;
+}
+
+#submitTodoBtn {
+  background-color: #007bff;
+  border: none;
+  border-radius: 0px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  color: white;
+  font-size: 18px;
+}
+
+.form-item input {
+  padding: 10px;
+}
+
+input[type=submit] {
+  padding: 10px;
+  border-radius: 10px;
 }

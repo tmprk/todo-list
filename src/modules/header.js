@@ -19,7 +19,6 @@ export const header = {
       } else {
         // project is added
         pubsub.pub('projectAdded', projectName);
-        console.log(projectName);
       }
     })
     

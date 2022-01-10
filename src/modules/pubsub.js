@@ -11,7 +11,7 @@ export const pubsub = {
     if (pubsub.events[eventName]) {
       pubsub.events[eventName].forEach(func => {
         func(data);
-        console.log(`${eventName} was published, which will run ${func}`);
+        // console.log(`${eventName} was published, which will run ${func}`);
       });
     }
   },

@@ -3,6 +3,7 @@ import { pubsub } from './modules/pubsub.js'
 import { header } from './modules/header';
 import { projects } from './modules/projects';
 import { listView } from './modules/listView';
+import { storage } from './modules/storage';
 
 const list = document.getElementById('list');
 const listItems = document.querySelectorAll('.list-item');
@@ -57,7 +58,12 @@ function main() {
 
   header.render(sidebar);
   projects.render(sidebar);
+
   listView.render(todoList);
+
+  if (storage.keys.length == 0) {
+    projects.add('example');
+  }
 }
 
 main();

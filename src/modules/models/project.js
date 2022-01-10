@@ -11,7 +11,7 @@ export default class Project {
   addTodo(data) {
     const title = data.title;
     this.todos.push(data);
-
+    
     // storage setItem stringify
   }
 
