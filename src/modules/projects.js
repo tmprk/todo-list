@@ -43,7 +43,7 @@ export const projects = {
     div.appendChild(container);
     
     projects.refresh();
-    pubsub.sub('projectAdded', projects.add);
+    pubsub.sub('projectAdded', projects.create);
   },
   renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
@@ -66,12 +66,12 @@ export const projects = {
     });
     return newProject;
   },
-  add: (projectName) => {
+  create: (projectName) => {
     var uuid = Math.random().toString(36).slice(-6);
 
     // add new project to storage
     const newProjectData = new Project(projectName, []);
-    storage.set(uuid, JSON.stringify(newProjectData));
+    storage.create(uuid, JSON.stringify(newProjectData));
     projects.refresh();
 
     console.log(`${projectName} was added`);

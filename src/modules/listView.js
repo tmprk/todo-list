@@ -64,9 +64,8 @@ export const listView = {
     // console.log('update view function', data);
   },
   addTodo: (todoData) => {
-    const obj = Todo.from(todoData);
-    storage.set(listView.selectedProject, obj);
-    // set item to localstorage for selected project
-    // update ui
+    const obj = Todo.from(todoData); // Todo object from json
+    storage.set(listView.selectedProject, obj); // set item to localstorage for selected project
+    listView.updateView(listView.selectedProject); // update view for selected project
   }
 }

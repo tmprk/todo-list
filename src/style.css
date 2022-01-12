@@ -221,18 +221,21 @@ table {
 #list {
   display: flex;
   flex-direction: column;
+  padding: 12px;
+  gap: 12px;
 }
 
 .list-item {
   background-color: white;
-  padding: 20px 20px 20px 30px;
+  padding: 20px 20px 20px 20px;
   /* border: 1px solid blue; */
 
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
 
   transition: opacity 100ms ease-in-out;
+  border-radius: 5px;
 }
 
 .list-item:hover {

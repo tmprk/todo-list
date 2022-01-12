@@ -1,6 +1,6 @@
 export default class Todo {
   constructor(title, description, date) {
-    this.identifier = new Date().toDateString();
+    this.identifier = new Date().valueOf();
     this.title = title;
     this.description = description;
     this.date = date;

@@ -7,7 +7,7 @@ export const modal = {
     slidingModal.setAttribute('id', 'slide-top-modal');
     slidingModal.innerHTML =
     `<div class="m-container slide-from-top">
-      <h2 class="m-title">Modal title</h2>
+      <h2 class="m-title">Add a Todo</h2>
       <div class="m-content">
         <form action="" id="form">
 
