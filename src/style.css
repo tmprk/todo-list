@@ -462,6 +462,7 @@ table {
 
 
 /* modal-form */
+
 input {
     width: 100%;
 }
@@ -475,7 +476,7 @@ button {
     float: right;
 }
 
-#form-example {
+#form {
   display: flex;
   flex-direction: column;
   gap: 12px;

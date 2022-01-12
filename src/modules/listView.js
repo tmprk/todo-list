@@ -13,6 +13,11 @@ export const listView = {
     addTodoButton.setAttribute('id', 'addTodoButton');
     addTodoButton.textContent = '+';
 
+    addTodoButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      pubsub.pub('showModal', null);
+    })
+
     div.appendChild(listWrapper);
     div.appendChild(addTodoButton);
     // pubsub.sub('newListItem', listView.addTodo)

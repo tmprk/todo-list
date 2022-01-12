@@ -3,6 +3,7 @@ import { pubsub } from './modules/pubsub.js'
 import { header } from './modules/header';
 import { projects } from './modules/projects';
 import { listView } from './modules/listView';
+import { modal } from './modules/modal';
 import { storage } from './modules/storage';
 
 const list = document.getElementById('list');
@@ -53,6 +54,7 @@ function createDetailItem(date, notes) {
 }
 
 function main() {
+  const container = document.getElementById('container');
   const sidebar = document.getElementById('sidebar');
   const todoList = document.getElementById('todoList');
 
@@ -60,6 +62,7 @@ function main() {
   projects.render(sidebar);
 
   listView.render(todoList);
+  modal.render(container);
 
   // if (storage.keys.length == 0) {
   //   projects.add('example');
