@@ -10,7 +10,7 @@ export const modal = {
       <h2 class="m-title">Modal title</h2>
       <div class="m-content">
         <form action="" id="form">
-        
+
           <div class="form-item">
             <label for="name">Todo name</label>
             <input type="text" name="name" id="name" required>
@@ -36,7 +36,15 @@ export const modal = {
     div.appendChild(slidingModal);
     pubsub.sub('showModal', modal.show);
   },
-  show: (hi) => {
+  listen: () => {
+    document.querySelector('#form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      pubsub.pub('submitTodo', data);
+      document.getElementById('slide-top-modal').classList.remove('active');
+    });
+  },
+  show: () => {
     var slideModal = document.getElementById('slide-top-modal');
     slideModal.classList.add('active');
   }

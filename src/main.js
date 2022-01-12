@@ -63,6 +63,7 @@ function main() {
 
   listView.render(todoList);
   modal.render(container);
+  modal.listen();
 
   // if (storage.keys.length == 0) {
   //   projects.add('example');

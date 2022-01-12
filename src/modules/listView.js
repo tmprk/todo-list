@@ -22,10 +22,11 @@ export const listView = {
     div.appendChild(addTodoButton);
     // pubsub.sub('newListItem', listView.addTodo)
     pubsub.sub('updateListView', listView.updateView);
+    pubsub.sub('submitTodo', listView.addTodo);
   },
   updateView: (uuid) => {
     listView.selectedProject = uuid;
-    console.log(listView.selectedProject);
+    // console.log(listView.selectedProject);
     console.log(`${uuid} clicked`);
     const list = document.getElementById('list');
     const header = document.getElementById('listHeader');
@@ -62,8 +63,8 @@ export const listView = {
     // enumerate todos variable
     // console.log('update view function', data);
   },
-  addTodo: (project, todoData) => {
-    console.log(project);
+  addTodo: (todoData) => {
+    console.log(listView.selectedProject);
     console.log(todoData);
   }
 }
