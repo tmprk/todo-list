@@ -241,7 +241,7 @@ table {
 
 #details {
   background-color: rgb(240, 240, 240);
-  transition: opacity 100ms ease-out, height 200ms ease-out;
+  transition: opacity 300ms ease-out, height 200ms ease-out;
   opacity: 0;
   height: 0;
 
@@ -264,6 +264,7 @@ table {
 }
 
 #details input[type=date] {
+  flex: 1;
   font-family: 'Inter';
   padding: 10px 5px 10px 20px;
   font-size: 18px;

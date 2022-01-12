@@ -77,7 +77,7 @@ export const projects = {
     console.log(`${projectName} was added`);
   },
   refresh: () => {
-    removeElementsByClass('project');
+    removeElementsByClass('project'); // removes all projects in dom
     const allProjects = storage.all();
 
     if (allProjects.length > 0) {

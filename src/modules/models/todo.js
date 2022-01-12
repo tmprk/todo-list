@@ -1,33 +1,37 @@
 export default class Todo {
   constructor(title, description, date) {
+    this.identifier = new Date().toDateString();
     this.title = title;
     this.description = description;
     this.date = date;
-    this.identifier = new Date();
   }
 
-  get name() {
-    return this.title;
-  }
+  // get name() {
+  //   return this.title;
+  // }
 
-  get description() {
-    return this.description;
-  }
+  // get description() {
+  //   return this.description;
+  // }
   
-  get date() {
-    return this.date;
-  }
+  // get date() {
+  //   return this.date;
+  // }
 
-  set name(title) {
-    this.title = title;
-  }
+  // set name(title) {
+  //   this.title = title;
+  // }
 
-  set description(newDescription) {
-    this.description = newDescription;
-  }
+  // set description(newDescription) {
+  //   this.description = newDescription;
+  // }
 
-  set date(newDate) {
-    this.date = newDate;
+  // set date(newDate) {
+  //   this.date = newDate;
+  // }
+
+  static from(json) {
+    return Object.assign(new Todo(), json);
   }
   
 }

@@ -36,8 +36,11 @@ export const storage = {
     const project = JSON.parse(localStorage.getItem(uuid));
     return project;
   },
-  set: (projectID, data) => {
-    localStorage.setItem(projectID, data);
+  set: (projectID, newData) => {
+    const existing = JSON.parse(localStorage.getItem(projectID));
+    // console.log(existing);
+    existing.todos.push(newData);
+    localStorage.setItem(projectID, JSON.stringify(existing));
   },
   keys: () => {
     return Object.keys(localStorage);

@@ -12,8 +12,8 @@ export const modal = {
         <form action="" id="form">
 
           <div class="form-item">
-            <label for="name">Todo name</label>
-            <input type="text" name="name" id="name" required>
+            <label for="title">Todo name</label>
+            <input type="text" name="title" id="name" required>
           </div>
 
           <div class="form-item">
@@ -27,7 +27,7 @@ export const modal = {
           </div>
 
           <div class="form-item">
-            <input type="submit" value="add-todo" id='submitTodoBtn'>
+            <input type="submit" value="Add Todo" id='submitTodoBtn'>
           </div>
         </form>
       </div>

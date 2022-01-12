@@ -1,5 +1,6 @@
 import { pubsub } from './pubsub.js'
 import { storage } from './storage.js';
+import Todo from './models/todo.js';
 
 export const listView = {
   selectedProject: null,
@@ -26,7 +27,6 @@ export const listView = {
   },
   updateView: (uuid) => {
     listView.selectedProject = uuid;
-    // console.log(listView.selectedProject);
     console.log(`${uuid} clicked`);
     const list = document.getElementById('list');
     const header = document.getElementById('listHeader');
@@ -37,7 +37,7 @@ export const listView = {
     header.textContent = projectObj['title'];
     list.innerHTML = '';
 
-    todos.forEach((element, index) => {
+    todos.forEach((element) => {
       const listItem = document.createElement('li');
       listItem.className = 'list-item';
 
@@ -48,7 +48,7 @@ export const listView = {
 
       const todoTitle = document.createElement('div');
       todoTitle.className = 'todoName';
-      todoTitle.textContent = element.todoTitle;
+      todoTitle.textContent = element.title;
 
       listItem.appendChild(checkbox);
       listItem.appendChild(todoTitle);
@@ -64,7 +64,9 @@ export const listView = {
     // console.log('update view function', data);
   },
   addTodo: (todoData) => {
-    console.log(listView.selectedProject);
-    console.log(todoData);
+    const obj = Todo.from(todoData);
+    storage.set(listView.selectedProject, obj);
+    // set item to localstorage for selected project
+    // update ui
   }
 }
