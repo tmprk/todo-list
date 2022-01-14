@@ -232,7 +232,7 @@ table {
 
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 
   transition: opacity 100ms ease-in-out;
   border-radius: 5px;
@@ -240,6 +240,11 @@ table {
 
 .list-item:hover {
   opacity: 0.7;
+}
+
+.list-item.complete {
+  background-color: rgba(198, 255, 198, 0.954);
+  text-decoration: line-through;
 }
 
 #details {
@@ -293,6 +298,7 @@ table {
   font-size: 18px;
 }
 
+/* https://stackoverflow.com/questions/68789475/how-can-i-style-checkbox-with-css */
 [type=checkbox] {
   width: 20px;
   height: 20px;

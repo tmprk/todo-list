@@ -26,7 +26,7 @@ export const projects = {
 
       const taskNumber = document.createElement('div');
       taskNumber.className = 'numberOfTasks';
-      taskNumber.textContent = '0 tasks';
+      taskNumber.textContent = '0 items';
 
       info.appendChild(title)
       info.appendChild(taskNumber);
@@ -44,6 +44,7 @@ export const projects = {
     
     projects.refresh();
     pubsub.sub('projectAdded', projects.create);
+    pubsub.sub('updateCount', projects.updateCount);
   },
   renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
@@ -56,7 +57,7 @@ export const projects = {
 
     const numberOfTasks = document.createElement('div');
     numberOfTasks.className = 'numberOfTasks';
-    numberOfTasks.textContent = '0 items';
+    numberOfTasks.textContent = `${storage.todoCount(uuid)} items`;
 
     newProject.appendChild(projectTitle);
     newProject.appendChild(numberOfTasks);
@@ -88,5 +89,10 @@ export const projects = {
         projectsContainer.appendChild(projectDiv);
       })
     }
+  },
+  updateCount: (uuid) => {
+    const projectCard = document.querySelector(`[data-id="${uuid}"]`);
+    const numberOfTasks = projectCard.querySelector('.numberOfTasks');
+    numberOfTasks.textContent = `${storage.todoCount(uuid)} items`;
   }
 }

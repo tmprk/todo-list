@@ -40,11 +40,24 @@ export const listView = {
     todos.forEach((element) => {
       const listItem = document.createElement('li');
       listItem.className = 'list-item';
+      listItem.setAttribute('data-id', element.identifier);
+      listItem.setAttribute('checked', element.complete); // where you left off
 
       const checkbox = document.createElement('input');
-      checkbox.setAttribute('checked', 'false');
+      
+      if (element.complete) {
+        listItem.classList.add('complete');
+        checkbox.setAttribute('checked', '');
+      }
+
       checkbox.setAttribute('type', 'checkbox');
       checkbox.className = 'custom-checkbox';
+
+      checkbox.onclick = function(e) {
+        const listItem = e.target.closest('li');
+        const todoId = listItem.getAttribute('data-id');
+        storage.toggle(uuid, todoId);
+      }
 
       const todoTitle = document.createElement('div');
       todoTitle.className = 'todoName';
@@ -64,8 +77,10 @@ export const listView = {
     // console.log('update view function', data);
   },
   addTodo: (todoData) => {
+    todoData.complete = false;
     const obj = Todo.from(todoData); // Todo object from json
     storage.set(listView.selectedProject, obj); // set item to localstorage for selected project
     listView.updateView(listView.selectedProject); // update view for selected project
+    pubsub.pub('updateCount', listView.selectedProject);
   }
 }
