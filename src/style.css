@@ -234,12 +234,12 @@ table {
   align-items: center;
   gap: 16px;
 
-  transition: opacity 100ms ease-in-out;
+  transition: opacity 100ms ease-in-out, background-color 100ms ease-in-out;
   border-radius: 5px;
 }
 
 .list-item:hover {
-  opacity: 0.7;
+  background-color: rgb(249, 249, 249);
 }
 
 .list-item.complete {

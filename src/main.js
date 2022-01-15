@@ -5,6 +5,7 @@ import { projects } from './modules/projects';
 import { listView } from './modules/listView';
 import { modal } from './modules/modal';
 import { storage } from './modules/storage';
+import { detail } from './modules/detail';
 
 const list = document.getElementById('list');
 const listItems = document.querySelectorAll('.list-item');
@@ -65,6 +66,7 @@ function main() {
   modal.render(container);
   modal.listen();
 
+  pubsub.sub('showDetail', detail.render);
   // if (storage.keys.length == 0) {
   //   projects.add('example');
   // }

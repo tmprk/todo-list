@@ -1,4 +1,6 @@
+import { projects } from "./projects";
 import { pubsub } from "./pubsub"
+import { storage } from "./storage";
 
 export const modal = {
   render: div => {
@@ -44,8 +46,10 @@ export const modal = {
       document.getElementById('slide-top-modal').classList.remove('active');
     });
   },
-  show: () => {
+  show: (project) => {
+    const title = storage.getProject(project).title;
     var slideModal = document.getElementById('slide-top-modal');
     slideModal.classList.add('active');
+    slideModal.querySelector('.m-title').textContent = `Add a todo: ${title}`
   }
 }

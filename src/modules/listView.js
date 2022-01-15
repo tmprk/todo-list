@@ -16,7 +16,7 @@ export const listView = {
 
     addTodoButton.addEventListener('click', function(event) {
       event.preventDefault();
-      pubsub.pub('showModal', null);
+      pubsub.pub('showModal', listView.selectedProject);
     })
 
     div.appendChild(listWrapper);
@@ -41,7 +41,15 @@ export const listView = {
       const listItem = document.createElement('li');
       listItem.className = 'list-item';
       listItem.setAttribute('data-id', element.identifier);
-      listItem.setAttribute('checked', element.complete); // where you left off
+      listItem.setAttribute('checked', element.complete);
+
+      listItem.addEventListener('click', function(event) {
+        // call 'showDetail'
+        // don't trigger when you click the custom checkbox
+        if (!event.target.classList.contains('custom-checkbox')) {
+          listView.showDetail(element.identifier);
+        }
+      });
 
       const checkbox = document.createElement('input');
       
@@ -67,14 +75,7 @@ export const listView = {
       listItem.appendChild(todoTitle);
 
       list.appendChild(listItem);
-      // <li class="list-item">
-      //   <input type="checkbox" class="custom-checkbox" checked>
-      //   <div class="todoName">Testing</div>
-      // </li>
     })
-    // clear existing items in list; access variable of selected list;
-    // enumerate todos variable
-    // console.log('update view function', data);
   },
   addTodo: (todoData) => {
     todoData.complete = false;
@@ -82,5 +83,19 @@ export const listView = {
     storage.set(listView.selectedProject, obj); // set item to localstorage for selected project
     listView.updateView(listView.selectedProject); // update view for selected project
     pubsub.pub('updateCount', listView.selectedProject);
+  },
+  showDetail: (taskID) => {
+    // using project id and task id,
+    // get task data from project
+    // pubsub publishes 'showDetail'
+
+    // run create detail view
+    // append it to item id
+    // populate its values with data from localStorage
+    const todos = storage.getProject(listView.selectedProject).todos;
+    const taskData = todos.find(function(v) {
+      return v.identifier === Number(taskID)
+    });
+    pubsub.pub('showDetail', taskData);
   }
 }
