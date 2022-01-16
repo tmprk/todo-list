@@ -25,18 +25,17 @@ export const listView = {
     pubsub.sub('updateListView', listView.updateView);
     pubsub.sub('submitTodo', listView.addTodo);
   },
-  updateView: (uuid) => {
-    listView.selectedProject = uuid;
-    console.log(`${uuid} clicked`);
+  updateView: (objToPass) => {
+    // pass todos json instead of uuid, or figure out how to pass in both
+    listView.selectedProject = objToPass['uuid'];
+    console.log(`${objToPass['uuid']} clicked`);
     const list = document.getElementById('list');
     const header = document.getElementById('listHeader');
 
-    var projectObj = storage.getProject(uuid);
-    var todos = projectObj['todos'];
-
-    header.textContent = projectObj['title'];
+    header.textContent = objToPass['title'];
     list.innerHTML = '';
-
+    
+    const todos = objToPass['todos'];
     todos.forEach((element) => {
       const listItem = document.createElement('li');
       listItem.className = 'list-item';

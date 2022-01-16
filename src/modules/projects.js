@@ -2,8 +2,10 @@ import Project from "./models/project";
 import { pubsub } from "./pubsub";
 import { storage } from "./storage";
 import { removeElementsByClass } from "./utils";
+import { dateDiffInDays } from "./utils";
 
 export const projects = {
+  sortedTodos: [],
   render: div => {
     const container = document.createElement('div');
     container.setAttribute('id', 'projects');
@@ -11,6 +13,8 @@ export const projects = {
     const filters = ['day', 'week', 'month'];
     const deadlines = document.createElement('div');
     deadlines.setAttribute('id', 'deadlines');
+
+    // sort todos into the filters
 
     filters.forEach((element, index) => {
       const category = document.createElement('div');
@@ -28,7 +32,7 @@ export const projects = {
       taskNumber.className = 'numberOfTasks';
       taskNumber.textContent = '0 items';
 
-      info.appendChild(title)
+      info.appendChild(title);
       info.appendChild(taskNumber);
 
       category.appendChild(info);
@@ -37,6 +41,9 @@ export const projects = {
       dot.className = 'dot orange';
 
       category.appendChild(dot);
+      category.addEventListener('click', function(e) {
+        projects.sortItems(e.target.id);
+      })
       deadlines.appendChild(category);
     })
     container.appendChild(deadlines);
@@ -62,8 +69,16 @@ export const projects = {
     newProject.appendChild(projectTitle);
     newProject.appendChild(numberOfTasks);
 
+    var projectObj = storage.getProject(uuid);
+    var todos = projectObj['todos'];
+
+    const objToPass = {};
+    objToPass['title'] = projectObj['title'];
+    objToPass['uuid'] = uuid;
+    objToPass['todos'] = todos;
+    
     newProject.addEventListener('click', function (e) {
-      pubsub.pub('updateListView', uuid);
+      pubsub.pub('updateListView', objToPass);
     });
     return newProject;
   },
@@ -94,5 +109,28 @@ export const projects = {
     const projectCard = document.querySelector(`[data-id="${uuid}"]`);
     const numberOfTasks = projectCard.querySelector('.numberOfTasks');
     numberOfTasks.textContent = `${storage.todoCount(uuid)} items`;
+  },
+  sortItems: (duration) => {
+    var numOfDays;
+    switch (duration) {
+      case 'day':
+        console.log('day');
+        numOfDays = 1;
+        break
+      case 'week':
+        console.log('week');
+        numOfDays = 7;
+        break
+      case 'month':
+        console.log('month');
+        numOfDays = 30;
+        break
+    }
+    storage.all().forEach((key) => {
+      var todos = storage.getProject(key).todos;
+      const newArrayOfObj = todos.filter(element => dateDiffInDays(new Date(element.date), new Date()) < numOfDays);
+      projects.sortedTodos[key] = newArrayOfObj;
+    });
+    console.log(projects.sortedTodos);
   }
 }

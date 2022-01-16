@@ -44,6 +44,7 @@ export const detail = {
         detailsListItem.classList.add('show');
       }, 100);
     }
+    
   },
   getChanges: (title, description, date) => {
     console.log('hello');
