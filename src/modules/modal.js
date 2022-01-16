@@ -43,6 +43,7 @@ export const modal = {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(e.target).entries());
       pubsub.pub('submitTodo', data);
+      document.getElementById('form').reset();
       document.getElementById('slide-top-modal').classList.remove('active');
     });
   },

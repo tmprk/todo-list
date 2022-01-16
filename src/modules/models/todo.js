@@ -4,6 +4,7 @@ export default class Todo {
     this.title = title;
     this.description = description;
     this.date = date;
+    this.parent = null;
     this.complete = false;
   }
 

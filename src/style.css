@@ -221,7 +221,7 @@ table {
 #list {
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  /* padding: 12px; */
   /* gap: 12px; */
 }
 
@@ -385,6 +385,12 @@ table {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#addTodoButton:disabled,
+#addTodoButton[disabled] {
+  opacity: 0.4;
+  cursor: default;
 }
 
 /* modal */

@@ -5,20 +5,20 @@ import { removeElementsByClass } from "./utils";
 import { dateDiffInDays } from "./utils";
 
 export const projects = {
-  sortedTodos: [],
+  filters: ['day', 'week', 'month'],
+  sortedTodos: {'day': [], 'week': [], 'month': []},
   render: div => {
     const container = document.createElement('div');
     container.setAttribute('id', 'projects');
 
-    const filters = ['day', 'week', 'month'];
+    const filters = projects.filters;
     const deadlines = document.createElement('div');
     deadlines.setAttribute('id', 'deadlines');
 
     // sort todos into the filters
-
-    filters.forEach((element, index) => {
+    filters.forEach((duration, index) => {
       const category = document.createElement('div');
-      category.setAttribute('id', filters[index]);
+      category.setAttribute('id', duration);
       category.className = 'filter';
 
       const info = document.createElement('div');
@@ -26,7 +26,7 @@ export const projects = {
 
       const title = document.createElement('div');
       title.className = 'projectTitle';
-      title.textContent = filters[index];
+      title.textContent = duration;
 
       const taskNumber = document.createElement('div');
       taskNumber.className = 'numberOfTasks';
@@ -42,16 +42,20 @@ export const projects = {
 
       category.appendChild(dot);
       category.addEventListener('click', function(e) {
-        projects.sortItems(e.target.id);
+        projects.sortAll();
+        console.log(`clicked ${duration} filter`);
+        pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[e.target.id]}); // left off
       })
       deadlines.appendChild(category);
     })
     container.appendChild(deadlines);
     div.appendChild(container);
-    
+
+    projects.sortAll();
     projects.refresh();
     pubsub.sub('projectAdded', projects.create);
-    pubsub.sub('updateCount', projects.updateCount);
+    pubsub.sub('updateCount', projects.updateTaskCount);
+    pubsub.sub('updateSorted', projects.sortAll);
   },
   renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
@@ -69,16 +73,9 @@ export const projects = {
     newProject.appendChild(projectTitle);
     newProject.appendChild(numberOfTasks);
 
-    var projectObj = storage.getProject(uuid);
-    var todos = projectObj['todos'];
-
-    const objToPass = {};
-    objToPass['title'] = projectObj['title'];
-    objToPass['uuid'] = uuid;
-    objToPass['todos'] = todos;
-    
-    newProject.addEventListener('click', function (e) {
-      pubsub.pub('updateListView', objToPass);
+    // var projectObj = storage.getProject(uuid);
+    newProject.addEventListener('click', function(e) {
+      pubsub.pub('updateListView', uuid);
     });
     return newProject;
   },
@@ -104,33 +101,45 @@ export const projects = {
         projectsContainer.appendChild(projectDiv);
       })
     }
+
+    document.querySelector('.project:last-child').style.borderBottom = '1px solid rgb(174, 174, 174)';
   },
-  updateCount: (uuid) => {
+  updateTaskCount: (uuid) => {
     const projectCard = document.querySelector(`[data-id="${uuid}"]`);
     const numberOfTasks = projectCard.querySelector('.numberOfTasks');
     numberOfTasks.textContent = `${storage.todoCount(uuid)} items`;
+  },
+  sortAll: () => {
+    const filters = projects.filters;
+    projects.sortedTodos = { 'day': [], 'week': [], 'month': []};
+    filters.forEach((duration) => {
+      projects.sortItems(duration);
+
+      const filter = document.getElementById(duration);
+      const numberOfTasks = filter.querySelector('.numberOfTasks');
+      numberOfTasks.textContent = `${projects.sortedTodos[duration].length} items`;
+    });
+    console.log('final', projects.sortedTodos);
   },
   sortItems: (duration) => {
     var numOfDays;
     switch (duration) {
       case 'day':
-        console.log('day');
         numOfDays = 1;
         break
       case 'week':
-        console.log('week');
         numOfDays = 7;
         break
       case 'month':
-        console.log('month');
         numOfDays = 30;
         break
     }
-    storage.all().forEach((key) => {
+    storage.all().forEach((key, index) => {
+      // console.log(key, index);
       var todos = storage.getProject(key).todos;
-      const newArrayOfObj = todos.filter(element => dateDiffInDays(new Date(element.date), new Date()) < numOfDays);
-      projects.sortedTodos[key] = newArrayOfObj;
+      const newArrayOfObj = todos.filter(element => dateDiffInDays(new Date(), new Date(element.date)) < numOfDays);
+      // console.log('new', `${duration}`, newArrayOfObj);
+      projects.sortedTodos[duration] = projects.sortedTodos[duration].concat(newArrayOfObj);
     });
-    console.log(projects.sortedTodos);
   }
 }

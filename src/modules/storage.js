@@ -42,7 +42,7 @@ export const storage = {
   create: (uuid, emptyProject) => {
     localStorage.setItem(uuid, emptyProject);
   },
-  set: (projectID, newData) => {
+  add: (projectID, newData) => {
     const current = JSON.parse(localStorage.getItem(projectID));
     current.todos.push(newData);
     localStorage.setItem(projectID, JSON.stringify(current));
