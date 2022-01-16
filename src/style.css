@@ -222,12 +222,13 @@ table {
   display: flex;
   flex-direction: column;
   padding: 12px;
-  gap: 12px;
+  /* gap: 12px; */
 }
 
 .list-item {
   background-color: white;
   padding: 20px 20px 20px 20px;
+  margin: 12px 12px 0px 12px;
   /* border: 1px solid blue; */
 
   display: flex;
@@ -263,12 +264,13 @@ table {
 #details.show {
   opacity: 1;
   /* min-height: 50px; */
-  padding: 10px;
+  /* padding: 10px; */
   display: flex;
   align-items: center;
   height: 50px;
 
   visibility: visible;
+  margin: 6px 12px 0px 12px;
 }
 
 #details input[type=date] {
