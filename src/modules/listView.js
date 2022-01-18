@@ -83,7 +83,8 @@ export const listView = {
 
         // hacky fix to refresh list view when currently using a filter
         if (['day', 'week', 'month'].includes(listView.selectedProject)) {
-          pubsub.pub('passToListView', listView.selectedProject);
+          // pubsub.pub('passToListView', listView.selectedProject);
+          listView.listTodos(projects.updatedFilterData);
         } else {
           listView.updateView(element.parent);
         }

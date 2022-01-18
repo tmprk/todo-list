@@ -42,10 +42,11 @@ export const projects = {
 
       category.appendChild(dot);
       category.addEventListener('click', function(e) {
-        projects.sortAll();
+        projects.updatedFilterData(e.target.id);
+        // projects.sortAll();
         
-        console.log(`clicked ${duration} filter`);
-        pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[e.target.id], 'isFilter': true }); // left off
+        // console.log(`clicked ${duration} filter`);
+        // pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[e.target.id], 'isFilter': true }); // left off
       })
       deadlines.appendChild(category);
     })
@@ -59,7 +60,7 @@ export const projects = {
     pubsub.sub('updateCount', projects.updateTaskCount);
     pubsub.sub('updateSorted', projects.sortAll);
 
-    pubsub.sub('passToListView', projects.test);
+    // pubsub.sub('passToListView', projects.updatedFilterData);
   },
   renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
@@ -146,9 +147,10 @@ export const projects = {
       projects.sortedTodos[duration] = projects.sortedTodos[duration].concat(newArrayOfObj);
     });
   },
-  test: (duration) => {
+  updatedFilterData: (duration) => {
     projects.sortAll();
     // console.log(`clicked ${duration} filter`);
-    pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[duration], 'isFilter': true }); // left off
+    // pubsub.pub('filterTodos', );
+    return { 'title': duration, 'todos': projects.sortedTodos[duration], 'isFilter': true };
   }
 }
