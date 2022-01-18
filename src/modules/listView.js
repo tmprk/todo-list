@@ -27,13 +27,15 @@ export const listView = {
     pubsub.sub('updateListView', listView.updateView);
     pubsub.sub('submitTodo', listView.addTodo);
     pubsub.sub('filterTodos', listView.listTodos);
+
+    pubsub.sub('updateFilterView', listView.listTodos);
   },
   updateView: (uuid) => {
-    console.log('update view', uuid);
+    console.log('update view:', uuid);
     // pass todos json instead of uuid, or figure out how to pass in both
     const project = storage.getProject(uuid);
     listView.selectedProject = uuid;
-    listView.listTodos({ 'title': project.title, 'todos': project.todos });
+    listView.listTodos({ 'title': project.title, 'todos': project.todos, 'isFilter': false });
 
     document.getElementById('addTodoButton').removeAttribute('disabled');
   },
@@ -43,6 +45,11 @@ export const listView = {
 
     header.textContent = obj['title'];
     list.innerHTML = '';
+
+    if (obj.isFilter == true) {
+      listView.selectedProject = obj.title;
+      console.log('SELECTED:', listView.selectedProject);
+    }
 
     const todosArray = obj['todos'];
     todosArray.forEach((element) => {
@@ -73,6 +80,13 @@ export const listView = {
         const listItem = e.target.closest('li');
         const todoId = listItem.getAttribute('data-id');
         storage.toggle(element.parent, todoId);
+
+        // hacky fix to refresh list view when currently using a filter
+        if (['day', 'week', 'month'].includes(listView.selectedProject)) {
+          pubsub.pub('passToListView', listView.selectedProject);
+        } else {
+          listView.updateView(element.parent);
+        }
       }
 
       const todoTitle = document.createElement('div');

@@ -43,8 +43,9 @@ export const projects = {
       category.appendChild(dot);
       category.addEventListener('click', function(e) {
         projects.sortAll();
+        
         console.log(`clicked ${duration} filter`);
-        pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[e.target.id]}); // left off
+        pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[e.target.id], 'isFilter': true }); // left off
       })
       deadlines.appendChild(category);
     })
@@ -53,9 +54,12 @@ export const projects = {
 
     projects.sortAll();
     projects.refresh();
+
     pubsub.sub('projectAdded', projects.create);
     pubsub.sub('updateCount', projects.updateTaskCount);
     pubsub.sub('updateSorted', projects.sortAll);
+
+    pubsub.sub('passToListView', projects.test);
   },
   renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
@@ -141,5 +145,10 @@ export const projects = {
       // console.log('new', `${duration}`, newArrayOfObj);
       projects.sortedTodos[duration] = projects.sortedTodos[duration].concat(newArrayOfObj);
     });
+  },
+  test: (duration) => {
+    projects.sortAll();
+    // console.log(`clicked ${duration} filter`);
+    pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[duration], 'isFilter': true }); // left off
   }
 }

@@ -55,6 +55,6 @@ export const storage = {
     });
     todo.complete = !todo.complete;
     localStorage.setItem(projectID, JSON.stringify(current));
-    pubsub.pub('updateListView', projectID);
+    // pubsub.pub('updateListView', projectID);
   }
 }
