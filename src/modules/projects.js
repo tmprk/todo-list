@@ -42,11 +42,10 @@ export const projects = {
 
       category.appendChild(dot);
       category.addEventListener('click', function(e) {
-        projects.updatedFilterData(e.target.id);
         // projects.sortAll();
         
         // console.log(`clicked ${duration} filter`);
-        // pubsub.pub('filterTodos', { 'title': duration, 'todos': projects.sortedTodos[e.target.id], 'isFilter': true }); // left off
+        pubsub.pub('filterTodos', projects.updatedFilterData(e.target.id)); // left off
       })
       deadlines.appendChild(category);
     })
@@ -59,8 +58,6 @@ export const projects = {
     pubsub.sub('projectAdded', projects.create);
     pubsub.sub('updateCount', projects.updateTaskCount);
     pubsub.sub('updateSorted', projects.sortAll);
-
-    // pubsub.sub('passToListView', projects.updatedFilterData);
   },
   renderProject: (projectName, uuid) => {
     const newProject = document.createElement('div');
@@ -124,7 +121,7 @@ export const projects = {
       const numberOfTasks = filter.querySelector('.numberOfTasks');
       numberOfTasks.textContent = `${projects.sortedTodos[duration].length} items`;
     });
-    console.log('final', projects.sortedTodos);
+    console.log('new:', projects.sortedTodos);
   },
   sortItems: (duration) => {
     var numOfDays;

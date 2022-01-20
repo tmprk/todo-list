@@ -34,6 +34,12 @@ export const modal = {
         </form>
       </div>
     </div>`;
+
+    slidingModal.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('m-content')) {
+        modal.dismiss();
+      }
+    })
     
     div.appendChild(slidingModal);
     pubsub.sub('showModal', modal.show);
@@ -52,5 +58,9 @@ export const modal = {
     var slideModal = document.getElementById('slide-top-modal');
     slideModal.classList.add('active');
     slideModal.querySelector('.m-title').textContent = `Add a todo: ${title}`
+  },
+  dismiss: () => {
+    var slideModal = document.getElementById('slide-top-modal');
+    slideModal.classList.remove('active');
   }
 }

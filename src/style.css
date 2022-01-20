@@ -246,6 +246,13 @@ table {
 .list-item.complete {
   background-color: rgba(198, 255, 198, 0.954);
   text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  animation: strike 1s linear;
+}
+
+@keyframes strike {
+  from { text-decoration-color: transparent; }
+  to { text-decoration-color: auto; }
 }
 
 #details {
