@@ -2,31 +2,36 @@ import { pubsub } from "./pubsub";
 
 export const storage = {
   initialize: function() {
+    var uuid = Math.random().toString(36).slice(-6);
     const dummyData = {
-      'projectTitle': 'example',
+      'title': 'example',
       'todos': [
         {
-          'identifier': 'ABC',
-          'todoTitle': 'Test 1',
+          'identifier': 123,
+          'title': 'Test 1',
           'description': 'This is a todo',
-          'date': '2015-03-25'
+          'date': '2015-03-25',
+          'parent': `${uuid}`,
+          'this.complete': false
         },
         {
-          'identifier': 'DEF',
-          'todoTitle': 'Test 2',
+          'identifier': 456,
+          'title': 'Test 2',
           'description': 'This is a todo',
-          'date': '2015-03-26'
+          'date': '2015-03-26',
+          'parent': `${uuid}`,
+          'this.complete': false
         },
         {
-          'identifier': 'GHI',
-          'todoTitle': 'Test 3',
+          'identifier': 789,
+          'title': 'Test 3',
           'description': 'This is a todo',
-          'date': '2015-03-27'
+          'date': '2015-03-27',
+          'parent': `${uuid}`,
+          'this.complete': false
         },
       ]
     };
-
-    var uuid = Math.random().toString(36).slice(-6);
     localStorage.setItem(uuid, JSON.stringify(dummyData));
   },
   all: () => {

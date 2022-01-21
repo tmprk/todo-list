@@ -96,15 +96,16 @@ export const projects = {
     const allProjects = storage.all();
 
     if (allProjects.length > 0) {
+      console.log('refresh');
       var projectsContainer = document.getElementById('projects');
       allProjects.forEach((projectID) => {
         const projectName = storage.getProject(projectID)['title'];
         const projectDiv = projects.renderProject(projectName, projectID)
         projectsContainer.appendChild(projectDiv);
       })
+      
+      console.log(document.querySelector('.project:last-child'));
     }
-
-    document.querySelector('.project:last-child').style.borderBottom = '1px solid rgb(174, 174, 174)';
   },
   updateTaskCount: (uuid) => {
     const projectCard = document.querySelector(`[data-id="${uuid}"]`);
