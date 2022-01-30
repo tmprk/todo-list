@@ -4,8 +4,6 @@ This is the second project of the Javascript curriculum in Full Stack Javascript
 
 It allows you to add and keep track of tasks, organize them into projects, and filter them based on due date.
 
-<br>
-
 ## Guidelines
 
 * Each component is made using a separate module.
@@ -16,20 +14,14 @@ It allows you to add and keep track of tasks, organize them into projects, and f
   * Each project takes up one key in localstorage
 * Day, Week, and Month filters are present to keep track of most urgent tasks
 
-<br>
-
 ## Screenshots
-Main             |  Add Todo
-:-------------------------:|:-------------------------:
-![main](screenshots/main.png)  |  ![modal](screenshots/modal.png)
-
-<br>
+|             Main              |            Add Todo             |
+| :---------------------------: | :-----------------------------: |
+| ![main](screenshots/main.png) | ![modal](screenshots/modal.png) |
 
 ## Demo
 
 A live preview of the site can be found [here](https://tmprk.github.io/todo-list/)
-
-<br>
 
 ## Built With
 
@@ -37,16 +29,12 @@ A live preview of the site can be found [here](https://tmprk.github.io/todo-list
 * [HTML 5]()
 * [CSS 3]()
 
-<br>
-
 ### Prerequisites
 
 * npm
   ```sh
   npm install npm@latest -g
   ```
-
-<br>
 
 ### Installation
 
@@ -64,14 +52,10 @@ A live preview of the site can be found [here](https://tmprk.github.io/todo-list
    npm run web (to run webpack-dev-server)
    ```
 
-<br>
-
 <!-- ROADMAP -->
 ## Roadmap
 
 - [ ] Edit date and description of task
-
-<br>
 
 <!-- CONTACT -->
 ## Contact
@@ -80,10 +64,8 @@ Timothy P. - [@12corexeon](https://twitter.com/12corexeon) - parkimothy@gmail.co
 
 Project Link: [https://github.com/tmprk/todo-list](https://github.com/tmprk/todo-list)
 
-<br>
-
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
 * [pubsub implementation](https://github.com/prof3ssorSt3v3/pubsub-demo/)
-* [util to subtract dates](https://stackoverflow.com/questions/3224834/get-difference-between-2-dates-in-javascript)
+* [Util to subtract dates](https://stackoverflow.com/questions/3224834/get-difference-between-2-dates-in-javascript)
